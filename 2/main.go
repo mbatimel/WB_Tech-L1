@@ -54,9 +54,7 @@ func merge(in ... <-chan int) <-chan int{
     var wg sync.WaitGroup
     out := make(chan int)
 
-    
     output := func(c <-chan int) {
-        
         for n := range c {
         out <- n
         }
@@ -64,11 +62,8 @@ func merge(in ... <-chan int) <-chan int{
     }
     wg.Add(len(in))
     for _, c := range in {
-    
         go output(c)
-       
     }
-
 
     go func() {
         wg.Wait()

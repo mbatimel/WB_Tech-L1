@@ -11,6 +11,7 @@ type Councurrency struct {
 	mu   sync.Mutex
 	data []int
 	sum  int
+	wg sync.WaitGroup
 }
 
 func NewCouncurrency(array []int) *Councurrency {
@@ -23,24 +24,24 @@ func NewCouncurrency(array []int) *Councurrency {
 	return &c
 }
 
-func (c *Councurrency) Step(wg *sync.WaitGroup, index int) {
+func (c *Councurrency) Step(index int) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	fmt.Printf("Start %d\n", index)
 	c.sum += c.data[index] * c.data[index]
 	time.Sleep(1 * time.Second)
 	fmt.Printf("End %d\n", index)
-	wg.Done()
+	c.wg.Done()
 }
 
 func main() {
 	sl := []int{2, 4, 6, 8, 10}
 	c := NewCouncurrency(sl)
-	var wg sync.WaitGroup
+	
 	for i := range sl {
-		wg.Add(1)
-		go c.Step(&wg, i)
+		c.wg.Add(1)
+		go c.Step(i)
 	}
-	wg.Wait()
+	c.wg.Wait()
 	fmt.Println(c.sum)
 }
