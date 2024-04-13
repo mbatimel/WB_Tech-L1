@@ -8,9 +8,9 @@ import (
 
 
 
-func conversion_channel(nums []int) <-chan int {
-    out := make(chan int, len(nums))
-    func(){
+func conversion_channel[T any](nums []T) <-chan T {
+    out := make(chan T, len(nums))
+    go func(){
         for _, n := range nums {
             out <- n
         }
@@ -37,7 +37,7 @@ func square_nums(c <-chan int) <-chan int {
    
     go func(){
         for n := range c {
-            fmt.Println("Start index %d", n)
+            fmt.Println("Start num: ", n)
             out <- n*n
             time.Sleep(1 * time.Second)
             
