@@ -10,7 +10,7 @@ import (
 
 func conversion_channel(nums []int) <-chan int {
     out := make(chan int, len(nums))
-    go func(){
+    func(){
         for _, n := range nums {
             out <- n
         }
@@ -33,12 +33,9 @@ func main() {
 }
 
 func square_nums(c <-chan int) <-chan int {
-
     out := make(chan int, len(c))
    
     go func(){
-
-        
         for n := range c {
             fmt.Println("Start index %d", n)
             out <- n*n
