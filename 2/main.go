@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 
@@ -22,8 +23,8 @@ func main() {
     a:= []int{2,4,6,8,10}
     c:= conversion_channel(a)
     square_chan := square_nums(c)
-    square_chan2 := square_nums(c)
-    for n := range merge(square_chan, square_chan2) {
+
+    for n := range merge(square_chan) {
         fmt.Println(n) 
         }
 
@@ -32,24 +33,30 @@ func main() {
 }
 
 func square_nums(c <-chan int) <-chan int {
-    mu := new(sync.Mutex)
+
     out := make(chan int, len(c))
+   
     go func(){
-       mu.Lock()
+
+        
         for n := range c {
+            fmt.Println("Start index %d", n)
             out <- n*n
+            time.Sleep(1 * time.Second)
+            
         }
-        mu.Unlock()
+        
         close(out)
     }()
     return out
 }
-func merge(in ...<-chan int) <-chan int{
+func merge(in ... <-chan int) <-chan int{
     var wg sync.WaitGroup
     out := make(chan int)
 
     
     output := func(c <-chan int) {
+        
         for n := range c {
         out <- n
         }
@@ -57,7 +64,9 @@ func merge(in ...<-chan int) <-chan int{
     }
     wg.Add(len(in))
     for _, c := range in {
+    
         go output(c)
+       
     }
 
 
