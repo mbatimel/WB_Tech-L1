@@ -20,7 +20,6 @@ func (c *Counter) Inc() {
 func (c *Counter) Value() int {
 	return c.counter
 }
-
 func main() {
 	var wg sync.WaitGroup
 	var c Counter

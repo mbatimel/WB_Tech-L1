@@ -9,15 +9,7 @@ import "fmt"
 
 Изменение глобальной переменной: Изменение глобальной переменной justString в 
 функции someFunc без явного указания на это может усложнить отслеживание состояния программы и сделать код менее читаемым.
-
-func someFunc() {
-	v := createHugeString(1 << 10)
-	justString = v[:100]
-}
-
-func main() {
-	someFunc()
-}*/
+*/
 
 func createHugeString(size uint64) string {
   fmt.Printf("Create new clise with size %d\n", size)

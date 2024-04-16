@@ -21,7 +21,6 @@ func binarySearch(arr []int, s int) int {
 
     return -1
 }
-
 func main() {
     var n = []int{2, 9, 11, 21, 22, 32, 36, 48, 76}
 

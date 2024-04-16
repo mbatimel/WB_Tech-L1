@@ -19,10 +19,8 @@ func quickSort(arr []string, low, high int) []string {
 			i++
 		
 	}
-	
 	return arr
 }
-
 func SortStart(str string) []string {
 	split_str:= strings.Split(str," ")
 	return quickSort(split_str, 0, len(split_str)-1)

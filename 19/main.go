@@ -12,7 +12,6 @@ func main() {
 	}
 
 }
-
 func quickSort(arr []rune, low, high int) []rune {
 	
 	i := low
