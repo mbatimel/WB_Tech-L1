@@ -4,7 +4,7 @@ import (
 	"container/list"
 	"fmt"
 )
-
+// написал адаптер который по сути представляет из себя stack
 type Stack struct {
 	list list.List
 	len  int

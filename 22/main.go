@@ -4,6 +4,11 @@ import (
 	"fmt"
 	"math/big"
 )
+// Для операций сложения, вычитания, умножения и деления чисел больше 2^20,
+// используем пакет math/big, который позволяет оперировать большими числами.
+// 1. big.Int для крупных целых чисел, когда 18 квинтиллионов недостаточно;
+// 2. big.Float для вещественных чисел с плавающей запятой производной точности;
+// 3. big.Rat для дробей вроде 1/3.
 
 func main() {
 	a := new(big.Int)
@@ -14,6 +19,7 @@ func main() {
 	for {
 		fmt.Printf("Enter first number: ")
 		fmt.Scan(&aStr)
+		// Создаем числа с помощью пакета big
 		if _, ok := a.SetString(aStr, 10); ok {
 			break
 		}
@@ -22,6 +28,7 @@ func main() {
 	for {
 		fmt.Printf("Enter second number: ")
 		fmt.Scan(&bStr)
+		// Создаем числа с помощью пакета big
 		if _, ok := b.SetString(bStr, 10); ok {
 			break
 		}

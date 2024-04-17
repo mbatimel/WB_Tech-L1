@@ -5,7 +5,6 @@ import (
 	"sync"
 	"time"
 )
-
 type Counter struct {
 	counter int
 	mu      sync.Mutex

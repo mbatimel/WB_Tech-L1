@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+//сплитуем нашу строку по пробелам далее как делали в 19 номере
+//просто меняем местами 
 func main() {
 	rs := "snow dog sun"
 	fmt.Println(SortStart(rs))

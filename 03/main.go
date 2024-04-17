@@ -13,7 +13,13 @@ type Councurrency struct {
 	sum  int
 	wg sync.WaitGroup
 }
+/*
+	решил поменять подход к написанию программы. 
+	у нас есть структура в которой содержаться переменные для хранения и суммирования чисел.
+	Изначально мы создаем в NewCouncurrency указатель на эту структуру и заполняем переменну data значениями из
+	исходного массива, далее мы возводим конкурентно в степень и суммируем все числа
 
+*/
 func NewCouncurrency(array []int) *Councurrency {
 	c := Councurrency{
 		data: make([]int, len(array)),

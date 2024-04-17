@@ -22,17 +22,17 @@ fmt.Println(interSection(ints1, ints2, ints3))
 }
 
 func interSection[T constraints.Ordered](in ...[]T) []T{
-    hash := make(map[T]*int) // value, counter
+    hash := make(map[T]*int) // счетчик значений
     result := make([]T, 0)
     for _, slice := range in {
-        duplicationHash := make(map[T]bool) // duplication checking for individual slice
+        duplicationHash := make(map[T]bool) // проверка слайса на дубликаты
         for _, value := range slice {
-            if _, isDup := duplicationHash[value]; !isDup { // is not duplicated in slice
-                if counter := hash[value]; counter != nil { // is found in hash counter map
-                    if *counter++; *counter >= len(in) { // is found in every slice
+            if _, isDup := duplicationHash[value]; !isDup { // не дублируется в срезе
+                if counter := hash[value]; counter != nil { // находится на карте хэш-счетчика
+                    if *counter++; *counter >= len(in) { // содержится в каждом слайсе
                         result = append(result, value)
                     }
-                } else { // not found in hash counter map
+                } else { // не найден на карте хэш-счетчика
                     i := 1
                     hash[value] = &i
                 }

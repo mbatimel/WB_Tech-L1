@@ -15,12 +15,10 @@ type Event struct {
 	 ch chan int64
 }
 func main() {
-	ev := new(Event)
 	workers := 0 
+	ev := Event{ch: make(chan int64, workers),}
 	fmt.Printf("Enter the number of workers: ")
 	fmt.Scan(&workers)
-	
-	ev.ch = make(chan int64, workers)
 	for i := 0; i < workers; i++ {
 		ev.wg.Add(1)
 		
@@ -30,7 +28,7 @@ func main() {
 					ev.mu.Lock()
 					fmt.Printf("Worker %d : %d\n",i,n)
 					ev.mu.Unlock()
-					time.Sleep(10 * time.Second)
+					time.Sleep(1 * time.Second)
 				}
 				fmt.Printf("Worker %d : Done\n", i)
 		}(i)
